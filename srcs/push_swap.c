@@ -5,20 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 20:35:13 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/06 14:36:12 by sakamoto-42      ###   ########.fr       */
+/*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
+/*   Updated: 2025/01/06 16:52:53 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
-
-typedef struct Node {
-	int		value;
-	struct	Node *next;
-} Node;
+#include "push_swap.h"
 
 Node	*create_node(int value)
 {
