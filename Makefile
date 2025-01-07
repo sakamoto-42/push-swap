@@ -11,12 +11,15 @@ LIBFT_SRCS_DIR = ./srcs
 
 HEADER_DIR = ./includes
 SRCS_DIR = ./srcs
-OBJ_DIR = ./objs
+OBJS_DIR = ./objs
 
 SRCS_FILES = \
-		push_swap.c
+		push_swap.c \
+		lst_utils.c \
+		parse_params.c \
+		parse_params_utils.c \
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.c=.o))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
 all: $(LIBFT) $(NAME)
 
@@ -26,8 +29,8 @@ $(LIBFT):
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

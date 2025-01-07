@@ -6,20 +6,11 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:05:42 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 06:42:38 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/07 09:04:05 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// checks for white-space characters.
-// In "C" these are: space, form-feed ('\f'), newline ('\n'),
-// carriage return ('\r'), horizontal tab  ('\t'), 
-// and  vertical tab ('\v')
-static int	ft_isspace(int c)
-{
-	return (c == 32 || (c >= 9 && c <= 13));
-}
 
 // convert a string to an integer
 

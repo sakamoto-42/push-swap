@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:02:33 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 11:22:51 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/07 09:57:21 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,6 @@ static char	*ft_extract_word(const char *start, const char *end)
 	return (word);
 }
 
-// free n strings of an array of strings
-static char	**ft_free_strs(char **strs, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-	return (NULL);
-}
-
 // Paramètres :
 // s: La chaîne de caractères à découper.
 // c: Le caractère délimiteur.
@@ -111,7 +96,7 @@ char	**ft_split(char const *s, char c)
 		word_end = ft_get_word_end(s, c);
 		splitted_strs[i] = ft_extract_word(s, word_end);
 		if (!splitted_strs[i])
-			return (ft_free_strs(splitted_strs, i));
+			return (ft_free_strs_until(splitted_strs, i));
 		s = word_end;
 		i++;
 	}

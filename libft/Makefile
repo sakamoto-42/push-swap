@@ -1,12 +1,17 @@
 NAME = libft.a
+FT_PRINTF = libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I$(HEADER_DIR)
 
+FT_PRINTF_DIR = ./ft_printf
+FT_PRINTF_HEADER_DIR = includes
+FT_PRINTF_SRCS_DIR = ./srcs
+
 HEADER_DIR = ./includes
 SRCS_DIR =./srcs
-OBJ_DIR = ./objs
+OBJS_DIR = ./objs
 
 SRCS_FILES = \
 	ft_isalpha.c \
@@ -14,6 +19,7 @@ SRCS_FILES = \
 	ft_isalnum.c \
 	ft_isascii.c \
 	ft_isprint.c \
+	ft_isspace.c \
 	ft_strlen.c \
 	ft_memset.c \
 	ft_bzero.c \
@@ -35,6 +41,8 @@ SRCS_FILES = \
 	ft_substr.c \
 	ft_strjoin.c \
 	ft_strtrim.c \
+	ft_free_strs_until.c \
+	ft_free_strs.c \
 	ft_split.c \
 	ft_itoa.c \
 	ft_strmapi.c \
@@ -55,22 +63,27 @@ SRCS_FILES = \
 	get_next_line.c \
 	get_next_line_utils.c \
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.c=.o))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
-all: $(NAME)
+all: $(FT_PRINTF) $(NAME)
+
+$(FT_PRINTF):
+	$(MAKE) -C $(FT_PRINTF_DIR)
 
 $(NAME): $(OBJS) 
 	ar rcs $(NAME) $(OBJS)
 
-$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
+	$(MAKE) -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(FT_PRINTF_DIR) fclean
 
 re: fclean all
 
