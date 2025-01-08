@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 13:56:18 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 18:26:46 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,11 +197,32 @@ void	rrr(t_stack **stack_a, t_stack **stack_b)
 	ft_printf("rrr\n");
 }
 
+int	ft_lst_is_sorted(t_stack *stack)
+{
+	int	min;
+
+	if (!stack)
+		return (0);
+	if (!stack->next)
+		return (1);
+	min = stack->value;
+	while (stack)
+	{
+		if (min > stack->value)
+			return (0);
+		min = stack->value;
+		stack = stack->next;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**strs;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	// DEBUG ONLY
+	int		sorted;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -222,9 +243,58 @@ int	main(int argc, char **argv)
 		//
 		return (1);
 	}
-	
 	// DEBUG ONLY
+	sorted = ft_lst_is_sorted(stack_a);
+	if (sorted)
+		ft_printf("sorted\n");
+	else
+		ft_printf("not sorted\n");
+	// TODO COUNT n ELEM
+	// IF 2
+	if (!sorted && !stack_a->next->next)
+	{
+		if (!(stack_a->value < stack_a->next->value))
+			ra(&stack_a);
+	}
+	sorted = ft_lst_is_sorted(stack_a);
+	if (sorted)
+		ft_printf("sorted\n");
+	else
+		ft_printf("not sorted\n");
+	// IF 3
+	int	ela = 0;
+	int	elb = 0;
+	int	elc = 0;
+	if (!sorted && !stack_a->next->next->next)
+	{
+		ela = stack_a->value;
+		elb = stack_a->next->value;
+		elc = stack_a->next->next->value;
+		if (ela < elb)
+		{
+			if (ela < elc)
+			{
+				sa(&stack_a);
+				ra(&stack_a);
+			}
+			else
+				rra(&stack_a);
+		}
+		else if (elb < elc)
+		{
+			if (ela < elc)
+				sa(&stack_a);
+			else
+				ra(&stack_a);
+		}
+		else
+		{
+			sa(&stack_a);
+			rra(&stack_a);
+		}
+	}
 	ft_printf_list(stack_a, stack_b);
+	/*
 	sa(&stack_a);
 	//ft_printf_list(stack_a, stack_b);
 	pb(&stack_a, &stack_b);
@@ -243,8 +313,12 @@ int	main(int argc, char **argv)
 	//ft_printf_list(stack_a, stack_b);
 	pa(&stack_a, &stack_b);
 	//ft_printf_list(stack_a, stack_b);
-	pa(&stack_a, &stack_b);
-	ft_printf_list(stack_a, stack_b);
+	pa(&stack_a, &stack_b);*/
+	sorted = ft_lst_is_sorted(stack_a);
+	if (sorted)
+		ft_printf("sorted\n");
+	else
+		ft_printf("not sorted\n");
 	ft_printf("\n");
 	//
 	return (0);
