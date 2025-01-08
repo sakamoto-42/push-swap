@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:54:02 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 10:23:34 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:36:59 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static long long	ft_strtoll(const char *str)
 
 	result = 0;
 	sign = 1;
-
 	while (ft_isspace(*str))
 		str++;
 	set_sign_strtoll(&str, &sign);
@@ -80,9 +79,9 @@ int	ft_is_int(const char *str)
 	return (n >= INT_MIN && n <= INT_MAX);
 }
 
-int	ft_is_unique(Node *head, int value)
+int	ft_is_unique(t_stack *head, int value)
 {
-	Node	*current;
+	t_stack	*current;
 
 	current = head;
 	while (current)

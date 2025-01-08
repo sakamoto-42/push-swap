@@ -6,18 +6,18 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 12:06:50 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:56:18 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-static int	ft_set_lst(Node **head, char **strs)
+static int	ft_set_lst(t_stack **head, char **strs)
 {
 	int		i;
 	int		value;
-	
+
 	i = 0;
 	while (strs[i])
 	{
@@ -34,8 +34,9 @@ static int	ft_set_lst(Node **head, char **strs)
 	ft_free_strs(strs);
 	return (1);
 }
+
 // DEBUG ONLY
-void	ft_printf_list(Node *stack_a, Node *stack_b)
+void	ft_printf_list(t_stack *stack_a, t_stack *stack_b)
 {
 	ft_printf("   A\t   B\n");
 	while (stack_a || stack_b)
@@ -58,7 +59,7 @@ void	ft_printf_list(Node *stack_a, Node *stack_b)
 	}
 }
 
-void	swap(Node *stack)
+void	swap(t_stack *stack)
 {
 	int	temp;
 
@@ -69,58 +70,138 @@ void	swap(Node *stack)
 	stack->value = temp;
 }
 
-void	sa(Node **stack_a)
+void	sa(t_stack **stack_a)
 {
 	swap(*stack_a);
 	ft_printf("sa\n");
 }
-void	sb(Node **stack_b)
+
+void	sb(t_stack **stack_b)
 {
 	swap(*stack_b);
 	ft_printf("sb\n");
 }
 
-void	ss(Node **stack_a, Node **stack_b)
+void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	sa(stack_a);
 	sb(stack_b);
 	ft_printf("ss\n");
 }
 
-void	push(Node **src, Node **dst)
+void	push(t_stack **src, t_stack **dst)
 {
-	Node	*temp;
+	t_stack	*temp;
 
 	if (!src)
 		return ;
-	temp = (*src)->next;
-	(*src)->next = *dst;
-	*dst = *src;
-	*src = temp;
+	temp = *src;
+	*src = (*src)->next;
+	temp->next = *dst;
+	*dst = temp;
 }
 
-void	pa(Node **stack_a, Node **stack_b)
+void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	if (!stack_b)
 		return ;
-	else
-		push(stack_b, stack_a);
+	push(stack_b, stack_a);
+	ft_printf("pa\n");
 }
 
-void	pb(Node **stack_a, Node **stack_b)
+void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	if (!stack_a)
 		return ;
-	else
-		push(stack_a, stack_b);
+	push(stack_a, stack_b);
+	ft_printf("pb\n");
 }
 
+void	rotate(t_stack **stack)
+{
+	t_stack	*first;
+	t_stack	*last;
+
+	if (!stack || !(*stack) || !(*stack)->next)
+		return ;
+	first = *stack;
+	last = *stack;
+
+	while (last->next)
+		last = last->next;
+	*stack = first->next;
+	last->next = first;
+	first->next = NULL;
+}
+
+void	ra(t_stack **stack_a)
+{
+	if (!stack_a)
+		return ;
+	rotate(stack_a);
+	ft_printf("ra\n");
+}
+
+void	rb(t_stack **stack_b)
+{
+	if (!stack_b)
+		return ;
+	rotate(stack_b);
+	ft_printf("rb\n");
+}
+
+void	rr(t_stack **stack_a, t_stack **stack_b)
+{
+	ra(stack_a);
+	rb(stack_b);
+	ft_printf("rr\n");
+}
+void	reverse_rotate(t_stack **stack)
+{
+	t_stack	*prev_last;
+	t_stack	*last;
+
+	if (!stack || !(*stack) || !(*stack)->next)
+		return ;
+	last = *stack;
+	while (last->next)
+	{
+		prev_last = last;
+		last = last->next;
+	}
+	prev_last->next = NULL;
+	last->next = *stack;
+	*stack = last;
+}
+
+void	rra(t_stack **stack_a)
+{
+	if (!stack_a)
+		return ;
+	reverse_rotate(stack_a);
+	ft_printf("rra\n");
+}
+
+void	rrb(t_stack **stack_b)
+{
+	if (!stack_b)
+		return ;
+	reverse_rotate(stack_b);
+	ft_printf("rrb\n");
+}
+
+void	rrr(t_stack **stack_a, t_stack **stack_b)
+{
+	rra(stack_a);
+	rrb(stack_b);
+	ft_printf("rrr\n");
+}
 
 int	main(int argc, char **argv)
 {
 	char	**strs;
-	Node	*stack_a;
-	Node	*stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -144,9 +225,25 @@ int	main(int argc, char **argv)
 	
 	// DEBUG ONLY
 	ft_printf_list(stack_a, stack_b);
+	sa(&stack_a);
+	//ft_printf_list(stack_a, stack_b);
 	pb(&stack_a, &stack_b);
-	ft_printf_list(stack_a, stack_b);
+	//ft_printf_list(stack_a, stack_b);
 	pb(&stack_a, &stack_b);
+	//ft_printf_list(stack_a, stack_b);
+	pb(&stack_a, &stack_b);
+	//ft_printf_list(stack_a, stack_b);
+	rr(&stack_a, &stack_b);
+	//ft_printf_list(stack_a, stack_b);
+	rrr(&stack_a, &stack_b);
+	//ft_printf_list(stack_a, stack_b);
+	sa(&stack_a);
+	//ft_printf_list(stack_a, stack_b);
+	pa(&stack_a, &stack_b);
+	//ft_printf_list(stack_a, stack_b);
+	pa(&stack_a, &stack_b);
+	//ft_printf_list(stack_a, stack_b);
+	pa(&stack_a, &stack_b);
 	ft_printf_list(stack_a, stack_b);
 	ft_printf("\n");
 	//

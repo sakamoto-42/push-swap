@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:38:33 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 10:24:20 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:38:14 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_check_params_errors(char **strs_to_check, char **strs_to_free)
 {
 	int	i;
-	
+
 	i = 0;
 	while (strs_to_check[i])
 	{
@@ -31,10 +31,11 @@ static int	ft_check_params_errors(char **strs_to_check, char **strs_to_free)
 	return (0);
 }
 
-static char	**ft_copy_strs_until(char **dst, char **src, size_t start, size_t len)
+static char	**ft_copy_strs_until(char **dst, char **src,
+	size_t start, size_t len)
 {
 	size_t		i;
-	
+
 	i = 0;
 	while (i < len)
 	{
@@ -75,7 +76,7 @@ static char	**concat_strs(char **strs1, char **strs2)
 static char	**ft_concat_and_free_strs(char **strs, char **current_strs)
 {
 	char	**temp_strs;
-	
+
 	temp_strs = strs;
 	strs = concat_strs(strs, current_strs);
 	ft_free_strs(temp_strs);
