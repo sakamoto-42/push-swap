@@ -6,12 +6,11 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:54:02 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/07 10:55:04 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:23:34 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 int	ft_is_nbr(const char *str)
 {
@@ -35,7 +34,17 @@ int	ft_is_nbr(const char *str)
 	return (1);
 }
 
-long long	ft_strtoll(const char *str)
+static void	set_sign_strtoll(const char **str, int *sign)
+{
+	if (**str == '-' || **str == '+')
+	{
+		if (**str == '-')
+			*sign = -1;
+		(*str)++;
+	}
+}
+
+static long long	ft_strtoll(const char *str)
 {
 	long long	result;
 	int			sign;
@@ -46,12 +55,7 @@ long long	ft_strtoll(const char *str)
 
 	while (ft_isspace(*str))
 		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
+	set_sign_strtoll(&str, &sign);
 	while (*str >= '0' && *str <= '9')
 	{
 		digit = *str - '0';

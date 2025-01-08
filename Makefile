@@ -1,12 +1,12 @@
 NAME = push_swap
-LIBFT = libft.a
+LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)/$(LIBFT_HEADER_DIR)
+INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR)
 
 LIBFT_DIR = ./libft
-LIBFT_HEADER_DIR = includes
+LIBFT_HEADER_DIR = $(LIBFT_DIR)/includes
 LIBFT_SRCS_DIR = ./srcs
 
 HEADER_DIR = ./includes
@@ -27,7 +27,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)

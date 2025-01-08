@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:21:27 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/07 10:45:08 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 09:42:49 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # include <stddef.h>
-# include <stdarg.h>
+# include "ft_printf.h"
 
 typedef struct s_list
 {
@@ -70,4 +70,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_printf(const char *str, ...);
+
 #endif

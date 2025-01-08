@@ -6,28 +6,29 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:52:31 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/07 10:59:43 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:38:13 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-Node	*create_node(int value)
+Node	*ft_create_node(int value, int index)
 {
-	Node *new_node = malloc(sizeof(Node));
+	Node *new_node = ft_calloc(1, sizeof(Node));
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
+	new_node->index = index;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-void	add_node(Node **head, int value)
+void	ft_add_node(Node **head, int value, int index)
 {
 	Node	*new_node;
 	Node	*current;
 
-	new_node = create_node(value);
+	new_node = ft_create_node(value, index);
 	if (!*head)
 		*head = new_node;
 	else
@@ -37,6 +38,13 @@ void	add_node(Node **head, int value)
 			current = current->next;
 		current->next = new_node;
 	}
+}
+
+void	ft_set_index(Node *head, int n)
+{
+	if (!head)
+		return ;
+	head->index = n;
 }
 
 void	ft_free_lst(Node *head)

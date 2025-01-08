@@ -1,13 +1,8 @@
 NAME = libft.a
-FT_PRINTF = libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I$(HEADER_DIR)
-
-FT_PRINTF_DIR = ./ft_printf
-FT_PRINTF_HEADER_DIR = includes
-FT_PRINTF_SRCS_DIR = ./srcs
 
 HEADER_DIR = ./includes
 SRCS_DIR =./srcs
@@ -62,13 +57,13 @@ SRCS_FILES = \
 	ft_lstmap.c \
 	get_next_line.c \
 	get_next_line_utils.c \
+	ft_printf.c \
+	ft_convert.c \
+	ft_convert_hex.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
-all: $(FT_PRINTF) $(NAME)
-
-$(FT_PRINTF):
-	$(MAKE) -C $(FT_PRINTF_DIR)
+all: $(NAME)
 
 $(NAME): $(OBJS) 
 	ar rcs $(NAME) $(OBJS)
@@ -79,11 +74,9 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 
 clean:
 	rm -f $(OBJS)
-	$(MAKE) -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(FT_PRINTF_DIR) fclean
 
 re: fclean all
 

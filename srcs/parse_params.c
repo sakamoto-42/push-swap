@@ -6,14 +6,13 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:38:33 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/07 10:58:06 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:24:20 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
-int	ft_check_params_errors(char **strs_to_check, char **strs_to_free)
+static int	ft_check_params_errors(char **strs_to_check, char **strs_to_free)
 {
 	int	i;
 	
@@ -31,13 +30,30 @@ int	ft_check_params_errors(char **strs_to_check, char **strs_to_free)
 	}
 	return (0);
 }
-char	**concat_strs(char **strs1, char **strs2)
+
+static char	**ft_copy_strs_until(char **dst, char **src, size_t start, size_t len)
+{
+	size_t		i;
+	
+	i = 0;
+	while (i < len)
+	{
+		dst[start + i] = ft_strdup(src[i]);
+		if (!dst[start + i])
+		{
+			ft_free_strs_until(dst, start + i);
+			return (NULL);
+		}
+		i++;
+	}
+	return (dst);
+}
+
+static char	**concat_strs(char **strs1, char **strs2)
 {
 	size_t		strs1_len;
 	size_t		strs2_len;
 	char		**strs;
-	size_t		i;
-	size_t		j;
 
 	strs1_len = 0;
 	strs2_len = 0;
@@ -45,36 +61,18 @@ char	**concat_strs(char **strs1, char **strs2)
 		strs1_len++;
 	while (strs2[strs2_len])
 		strs2_len++;
-	strs = malloc((strs1_len + strs2_len + 1) * sizeof(char *));
+	strs = ft_calloc((strs1_len + strs2_len + 1), sizeof(char *));
 	if (!strs)
 		return (NULL);
-	i = 0;
-	while (i < strs1_len)
-	{
-		strs[i] = ft_strdup(strs1[i]);
-		if (!strs[i])
-		{
-			ft_free_strs_until(strs, i);
-			return (NULL);
-		}
-		i++;
-	}
-	j = 0;
-	while (j < strs2_len)
-	{
-		strs[i + j] = ft_strdup(strs2[j]);
-		if (!strs[i + j])
-		{
-			ft_free_strs_until(strs, i + j);
-			return (NULL);
-		}
-		j++;
-	}
-	strs[i + j] = NULL;
+	if (!ft_copy_strs_until(strs, strs1, 0, strs1_len))
+		return (NULL);
+	if (!ft_copy_strs_until(strs, strs2, strs1_len, strs2_len))
+		return (NULL);
+	strs[strs1_len + strs2_len] = NULL;
 	return (strs);
 }
 
-char	**ft_concat_and_free_strs(char **strs, char **current_strs)
+static char	**ft_concat_and_free_strs(char **strs, char **current_strs)
 {
 	char	**temp_strs;
 	
@@ -84,7 +82,6 @@ char	**ft_concat_and_free_strs(char **strs, char **current_strs)
 	ft_free_strs(current_strs);
 	return (strs);
 }
-
 
 char	**ft_parse_params(int ac, char **av)
 {
@@ -99,7 +96,7 @@ char	**ft_parse_params(int ac, char **av)
 		current_strs = ft_split(av[i], ' ');
 		if (ft_check_params_errors(current_strs, strs))
 		{
-			write(2, "Error\n", 6);
+			ft_putstr_fd("Error\n", 2);
 			return (NULL);
 		}
 		if (!strs)
