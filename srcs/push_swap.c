@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 14:58:58 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:40:55 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_printf_stacks(t_stack *stack_a, t_stack *stack_b)
 	{
 		if (stack_a)
 		{
+			ft_printf("%d : ", stack_a->position);
 			ft_printf("(%d) ", stack_a->index);
 			ft_printf("%d\t", stack_a->value);
 			stack_a = stack_a->next;
@@ -28,6 +29,7 @@ void	ft_printf_stacks(t_stack *stack_a, t_stack *stack_b)
 			ft_printf("\t");
 		if (stack_b)
 		{
+			ft_printf("%d : ", stack_b->position);
 			ft_printf("(%d) ", stack_b->index);
 			ft_printf("%d", stack_b->value);
 			stack_b = stack_b->next;
@@ -55,13 +57,13 @@ int	main(int argc, char **argv)
 	ft_printf_stacks(stack_a, stack_b);
 	if (ft_check_stack_a_sorted(stack_a))
 		return (0);
-	size = ft_stack_size(stack_a);
+	size = ft_get_stack_size(stack_a);
 	if (size == 2)
 		ft_sort_stack_a_two(&stack_a);
 	else if (size == 3)
 		ft_sort_stack_a_three(&stack_a);
-	else if (size == 4)
-		ft_sort_stack_a_four(&stack_a, &stack_b);
+	//else if (size == 4)
+		//ft_sort_stack_a_four(&stack_a, &stack_b);
 		//ft_sort_stack_a(&stack_a, &stack_b, size);
 	ft_printf_stacks(stack_a, stack_b);
 	return (0);

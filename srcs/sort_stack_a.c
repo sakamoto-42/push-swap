@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 15:08:58 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:39:49 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,37 +67,6 @@ void	ft_sort_stack_a_four(t_stack **stack_a, t_stack **stack_b)
 
 	*min
 }*/
-
-
-int	ft_find_min(t_stack *stack)
-{
-	int	min;
-
-	min = stack->index;
-	while (stack->next)
-	{
-		if (stack->next->index < min)
-			min = stack->next->index;
-		stack = stack->next;
-	}
-	return (min);
-}
-
-int	ft_find_max(t_stack *stack)
-{
-	int	max;
-
-	max = stack->index;
-	while (stack->next)
-	{
-		if (stack->next->index > max)
-			max = stack->next->index;
-		stack = stack->next;
-	}
-	return (max);
-}
-
-
 
 /*
 void	ft_sort_stack_a(t_stack **stack_a, t_stack **stack_b, int size)

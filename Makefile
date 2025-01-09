@@ -14,18 +14,18 @@ SRCS_DIR = ./srcs
 OBJS_DIR = ./objs
 
 SRCS_FILES = \
-		push_swap.c \
-		lst_utils.c \
-		parse_params.c \
-		parse_params_utils.c \
 		check_sorted.c \
+		parse_params_utils.c \
+		parse_params.c \
+		push_swap.c \
 		push.c \
 		reverse_rotate.c \
 		rotate.c \
-		swap.c \
-		set_stack_a.c \
+		set_stack_utils.c \
 		sort_stack_a.c \
-
+		stack_init_utils.c \
+		stack_utils.c \
+		swap.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
