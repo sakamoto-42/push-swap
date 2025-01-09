@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 15:40:55 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:42:28 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	main(int argc, char **argv)
 		ft_sort_stack_a_two(&stack_a);
 	else if (size == 3)
 		ft_sort_stack_a_three(&stack_a);
-	//else if (size == 4)
-		//ft_sort_stack_a_four(&stack_a, &stack_b);
+	else if (size == 4)
+		ft_sort_stack_a_four(&stack_a, &stack_b, size);
 		//ft_sort_stack_a(&stack_a, &stack_b, size);
 	ft_printf_stacks(stack_a, stack_b);
 	return (0);

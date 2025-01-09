@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:24:39 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 15:34:49 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:49:45 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,30 @@ int	ft_get_stack_size(t_stack *stack)
 	return (count);
 }
 
-int	ft_find_stack_min(t_stack *stack)
+t_stack *ft_find_stack_min(t_stack *stack)
 {
-	int	min;
+	t_stack	*stack_min;
 
-	min = stack->index;
+	stack_min = stack;
 	while (stack->next)
 	{
-		if (stack->next->index < min)
-			min = stack->next->index;
+		if (stack->next->index < stack_min->index)
+			stack_min = stack->next;
 		stack = stack->next;
 	}
-	return (min);
+	return (stack_min);
 }
 
-int	ft_find_stack_max(t_stack *stack)
+t_stack *ft_find_stack_max(t_stack *stack)
 {
-	int	max;
+	t_stack	*stack_max;
 
-	max = stack->index;
+	stack_max = stack;
 	while (stack->next)
 	{
-		if (stack->next->index > max)
-			max = stack->next->index;
+		if (stack->next->index < stack_max->index)
+			stack_max = stack->next;
 		stack = stack->next;
 	}
-	return (max);
+	return (stack_max);
 }
