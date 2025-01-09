@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:24:39 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 16:49:45 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:43:31 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_get_stack_size(t_stack *stack)
 	return (count);
 }
 
-t_stack *ft_find_stack_min(t_stack *stack)
+t_stack	*ft_find_stack_min(t_stack *stack)
 {
 	t_stack	*stack_min;
 
@@ -41,7 +41,7 @@ t_stack *ft_find_stack_min(t_stack *stack)
 	return (stack_min);
 }
 
-t_stack *ft_find_stack_max(t_stack *stack)
+t_stack	*ft_find_stack_max(t_stack *stack)
 {
 	t_stack	*stack_max;
 

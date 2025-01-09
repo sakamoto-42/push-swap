@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 16:43:46 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:44:44 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ t_stack		*ft_create_stack(int value);
 void		ft_add_stack(t_stack **stack_a, int value);
 void		ft_free_stack(t_stack *stack);
 
-int			ft_set_stack_a(t_stack **stack_a, char **strs);		
+int			ft_set_stack_a(t_stack **stack_a, char **strs);
 void		ft_set_stack_index(t_stack *stack);
 void		ft_set_stack_position(t_stack *stack);
 
 int			ft_get_stack_size(t_stack *stack);
-t_stack 	*ft_find_stack_min(t_stack *stack);
-t_stack 	*ft_find_stack_max(t_stack *stack);
+t_stack		*ft_find_stack_min(t_stack *stack);
+t_stack		*ft_find_stack_max(t_stack *stack);
 
 void		rotate(t_stack **stack);
 int			ra(t_stack **stack_a);
@@ -69,9 +69,9 @@ void		ft_sort_stack_a_three(t_stack **stack_a);
 void		ft_sort_stack_a_three_a_inf_b(t_stack **stack_a, int a, int c);
 void		ft_sort_stack_a_three_b_inf_c(t_stack **stack_a, int a, int c);
 
-//void		ft_sort_stack_a(t_stack **stack_a, t_stack **stack_b, int size);
-void		ft_sort_stack_a_four(t_stack **stack_a, t_stack **stack_b, int size);
+void		ft_sort_stack_a_four(t_stack **stack_a,
+				t_stack **stack_b, int size);
 
-void	ft_printf_stacks(t_stack *stack_a, t_stack *stack_b);
+void		ft_printf_stacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif

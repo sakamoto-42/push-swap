@@ -1,5 +1,4 @@
 NAME = libft.a
-PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -67,12 +66,9 @@ SRCS_FILES = \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
-all: $(PRINTF) $(NAME)
+all: $(NAME)
 
-$(PRINTF):
-	$(MAKE) -C $(PRINTF_DIR)
-
-$(NAME): $(OBJS) 
+$(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS) $(PRINTF) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
@@ -81,11 +77,9 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 
 clean:
 	rm -f $(OBJS)
-	$(MAKE) -C $(PRINTF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(PRINTF_DIR) fclean
 
 re: fclean all
 

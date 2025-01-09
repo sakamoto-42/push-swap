@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 16:49:27 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:39:18 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,22 @@ void	ft_sort_stack_a_four(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_stack	*stack_a_min;
 	int		n;
+	int		(*move)(t_stack **);
 
 	(void) stack_b;
 	stack_a_min = ft_find_stack_min(*stack_a);
-	ft_printf("index min : %d", stack_a_min->index);
-	ft_printf("position min : %d", stack_a_min->position);
-	if (stack_a_min->position < size / 2)
+	if (stack_a_min->position <= size / 2)
 	{
-		ft_printf("up");
 		n = stack_a_min->position;
-		ft_printf("%d", n);
-		while (n--)
-		{
-			ft_printf("RA");
-			ra(&stack_a_min);
-		}
+		move = ra;
 	}
 	else
 	{
-		ft_printf("down");
 		n = size - stack_a_min->position;
-		while (n--)
-		{
-			ft_printf("RRA");
-			rra(&stack_a_min);
-		}
-	}	 
-	//ft_printf("MIN %d", stack_a_min->value);
+		move = rra;
+	}
+	while (n--)
+		move(stack_a);
 }
 
 /*
@@ -99,7 +88,7 @@ void	ft_sort_stack_a(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	int	max_b;
 	int	count;
-	
+
 	(void) size;
 	count = 0;
 	pb(stack_a, stack_b);
