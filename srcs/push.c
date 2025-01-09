@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:18:01 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 10:05:05 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:12:53 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@ void	push(t_stack **src, t_stack **dst)
 	*dst = temp;
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b)
+int	pa(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!stack_b)
-		return ;
 	push(stack_b, stack_a);
 	ft_printf("pa\n");
+	return (1);
 }
 
-void	pb(t_stack **stack_a, t_stack **stack_b)
+int	pb(t_stack **stack_a, t_stack **stack_b)
 {
-	if (!stack_a)
-		return ;
 	push(stack_a, stack_b);
 	ft_printf("pb\n");
+	return (1);
 }

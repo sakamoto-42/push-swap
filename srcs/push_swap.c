@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 10:15:44 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:58:58 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
-	//ft_printf_stacks(stack_a, stack_b);
+	ft_printf_stacks(stack_a, stack_b);
 	if (ft_check_stack_a_sorted(stack_a))
 		return (0);
 	size = ft_stack_size(stack_a);
@@ -60,8 +60,9 @@ int	main(int argc, char **argv)
 		ft_sort_stack_a_two(&stack_a);
 	else if (size == 3)
 		ft_sort_stack_a_three(&stack_a);
-	else
-		ft_sort_stack_a(&stack_a, &stack_b, size);
-	//ft_printf_stacks(stack_a, stack_b);
+	else if (size == 4)
+		ft_sort_stack_a_four(&stack_a, &stack_b);
+		//ft_sort_stack_a(&stack_a, &stack_b, size);
+	ft_printf_stacks(stack_a, stack_b);
 	return (0);
 }

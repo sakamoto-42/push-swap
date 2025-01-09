@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:54:02 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 13:36:59 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:38:25 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	ft_is_int(const char *str)
 	return (n >= INT_MIN && n <= INT_MAX);
 }
 
-int	ft_is_unique(t_stack *head, int value)
+int	ft_is_unique(t_stack *stack_a, int value)
 {
 	t_stack	*current;
 
-	current = head;
+	current = stack_a;
 	while (current)
 	{
 		if (current->value == value)

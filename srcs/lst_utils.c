@@ -6,13 +6,13 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:52:31 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 10:04:39 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:41:28 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_create_node(int value, int index)
+t_stack	*ft_create_node(int value)
 {
 	t_stack	*new_node;
 
@@ -20,41 +20,58 @@ t_stack	*ft_create_node(int value, int index)
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
-	new_node->index = index;
+	new_node->index = 0;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-void	ft_add_node(t_stack **head, int value, int index)
+void	ft_add_node(t_stack **stack, int value)
 {
 	t_stack	*new_node;
 	t_stack	*current;
 
-	new_node = ft_create_node(value, index);
-	if (!*head)
-		*head = new_node;
+	new_node = ft_create_node(value);
+	if (!*stack)
+		*stack = new_node;
 	else
 	{
-		current = *head;
+		current = *stack;
 		while (current->next)
 			current = current->next;
 		current->next = new_node;
 	}
 }
 
-void	ft_set_index(t_stack *head, int n)
+void	ft_set_index(t_stack *stack_a)
 {
-	if (!head)
+	t_stack	*current;
+	t_stack	*temp;
+	int		index;
+
+	if (!stack_a)
 		return ;
-	head->index = n;
+	current = stack_a;
+	while (current)
+	{
+		index = 1;
+		temp = stack_a;
+		while (temp)
+		{
+			if (temp->value < current->value)
+				index++;
+			temp = temp->next;
+		}
+		current->index = index;
+		current = current->next;
+	}
 }
 
-void	ft_free_lst(t_stack *head)
+void	ft_free_lst(t_stack *stack)
 {
 	t_stack	*current;
 	t_stack	*temp;
 
-	current = head;
+	current = stack;
 	while (current)
 	{
 		temp = current;

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:11:35 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 10:04:59 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:13:27 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,24 @@ void	rotate(t_stack **stack)
 	first->next = NULL;
 }
 
-void	ra(t_stack **stack_a)
+int	ra(t_stack **stack_a)
 {
-	if (!stack_a)
-		return ;
 	rotate(stack_a);
 	ft_printf("ra\n");
+	return (1);
 }
 
-void	rb(t_stack **stack_b)
+int	rb(t_stack **stack_b)
 {
-	if (!stack_b)
-		return ;
 	rotate(stack_b);
 	ft_printf("rb\n");
+	return (1);
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+int	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	ra(stack_a);
 	rb(stack_b);
 	ft_printf("rr\n");
+	return (1);
 }
