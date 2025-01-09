@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 21:44:44 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/09 22:47:57 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int			ss(t_stack **stack_a, t_stack **stack_b);
 
 void		ft_sort_stack_a_two(t_stack **stack_a);
 void		ft_sort_stack_a_three(t_stack **stack_a);
-void		ft_sort_stack_a_three_a_inf_b(t_stack **stack_a, int a, int c);
-void		ft_sort_stack_a_three_b_inf_c(t_stack **stack_a, int a, int c);
 
 void		ft_sort_stack_a_four(t_stack **stack_a,
 				t_stack **stack_b, int size);
