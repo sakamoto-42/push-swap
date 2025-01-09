@@ -18,6 +18,14 @@ SRCS_FILES = \
 		lst_utils.c \
 		parse_params.c \
 		parse_params_utils.c \
+		check_sorted.c \
+		push.c \
+		reverse_rotate.c \
+		rotate.c \
+		swap.c \
+		set_stack_a.c \
+		sort_stack_a.c \
+
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 

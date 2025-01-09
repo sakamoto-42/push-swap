@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:52:31 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 13:37:40 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:04:39 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,19 @@ void	ft_free_lst(t_stack *head)
 		current = current->next;
 		free(temp);
 	}
+}
+
+int	ft_stack_size(t_stack *stack)
+{
+	int		count;
+
+	if (!stack)
+		return (0);
+	count = 1;
+	while (stack->next)
+	{
+		stack = stack->next;
+		count++;
+	}
+	return (count);
 }
