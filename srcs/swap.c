@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:17:36 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 11:10:46 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:45:30 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	swap(t_stack *stack)
 	temp = stack->next->value;
 	stack->next->value = stack->value;
 	stack->value = temp;
+	ft_set_stack_position(stack);
 }
 
 int	sa(t_stack **stack_a)

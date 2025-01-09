@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:17:07 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 11:13:13 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:46:31 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	reverse_rotate(t_stack **stack)
 	prev_last->next = NULL;
 	last->next = *stack;
 	*stack = last;
+	ft_set_stack_position(*stack);
 }
 
 int	rra(t_stack **stack_a)

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:11:35 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 11:13:27 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:44:54 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	rotate(t_stack **stack)
 	*stack = first->next;
 	last->next = first;
 	first->next = NULL;
+	ft_set_stack_position(*stack);
 }
 
 int	ra(t_stack **stack_a)

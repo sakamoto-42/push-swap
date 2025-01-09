@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:18:01 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 11:12:53 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:44:22 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	push(t_stack **src, t_stack **dst)
 	*src = (*src)->next;
 	temp->next = *dst;
 	*dst = temp;
+	ft_set_stack_position(*src);
+	ft_set_stack_position(*dst);
 }
 
 int	pa(t_stack **stack_a, t_stack **stack_b)
