@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:18:01 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 15:44:22 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:52:52 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	push(t_stack **src, t_stack **dst)
 {
 	t_stack	*temp;
 
-	if (!src)
+	if (!src || !*src)
 		return ;
 	temp = *src;
 	*src = (*src)->next;
