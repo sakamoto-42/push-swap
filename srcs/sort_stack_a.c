@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 22:47:42 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/10 11:15:51 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <math.h>
 
 void	ft_sort_stack_a_two(t_stack **stack_a)
 {
@@ -81,4 +82,31 @@ void	ft_sort_stack_a_four(t_stack **stack_a, t_stack **stack_b, int size)
 	ft_sort_stack_a_three(stack_a);
 	while (ft_get_stack_size(*stack_b) > 0)
 		pa(stack_a, stack_b);
+}
+
+#include <stdio.h>
+
+void		ft_sort_stack_a_chunks(t_stack **stack_a, t_stack **stack_b, int size)
+{
+	float		size_sqrt;
+	float		k;
+	int		n_chunks;
+	//int		chunk_size;
+
+
+
+	k = 2.0;
+	size = 500;
+	size_sqrt = ft_sqrt_float(size);
+	//printf("%.7f", size_sqrt);
+	if (size_sqrt != (int)size_sqrt)
+		n_chunks = (size_sqrt * k) + 1;
+	else
+		n_chunks = size_sqrt * k;
+	ft_printf("%d", n_chunks);
+	//int int_part = (int)size_sqrt;
+	//n_chunks = (((int)size_sqrt) + 1) * k;
+	//ft_printf("%d", int_part);
+	(void) stack_a;
+	(void) stack_b;
 }

@@ -23,6 +23,7 @@ SRCS_FILES = \
 		rotate.c \
 		set_stack_utils.c \
 		sort_stack_a.c \
+		sort_utils.c \
 		stack_init_utils.c \
 		stack_utils.c \
 		swap.c \
@@ -35,7 +36,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME) -lm
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
