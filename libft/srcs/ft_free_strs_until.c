@@ -6,11 +6,10 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 09:56:16 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 13:36:26 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/11 08:17:40 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
 // free an array of strings until n (not included)

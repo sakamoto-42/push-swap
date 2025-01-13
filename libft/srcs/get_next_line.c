@@ -6,10 +6,11 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:56:40 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/06 17:52:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/11 08:44:56 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "get_next_line.h"
 
 t_file	*ft_get_or_create_file_struct(int fd, t_file **files)
@@ -52,10 +53,10 @@ char	*ft_extract_line(char **remaining)
 	nl_pos = ft_strchr(*remaining, '\n');
 	if (!nl_pos)
 		return (NULL);
-	line = ft_strcopy(*remaining, nl_pos - *remaining + 1);
+	line = ft_strndup(*remaining, nl_pos - *remaining + 1);
 	if (!line)
 		return (NULL);
-	temp = ft_strcopy(nl_pos + 1, ft_strlen(nl_pos + 1));
+	temp = ft_strndup(nl_pos + 1, ft_strlen(nl_pos + 1));
 	if (!temp)
 	{
 		free(line);
@@ -77,7 +78,7 @@ char	*ft_finalize_line(t_file **file_ptr, ssize_t bytes_read)
 		ft_free_file(file_ptr);
 		return (NULL);
 	}
-	line = ft_strcopy(file->remaining, ft_strlen(file->remaining));
+	line = ft_strndup(file->remaining, ft_strlen(file->remaining));
 	ft_free_file(file_ptr);
 	return (line);
 }
@@ -99,7 +100,7 @@ char	*get_next_line(int fd)
 	while (bytes_read > 0)
 	{
 		file->buffer[bytes_read] = '\0';
-		file->remaining = ft_strconcat(file->remaining, file->buffer,
+		file->remaining = ft_strnjoin(file->remaining, file->buffer,
 				ft_strlen(file->remaining), bytes_read);
 		if (!file->remaining)
 			return (NULL);

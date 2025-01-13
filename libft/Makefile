@@ -1,15 +1,13 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(HEADER_DIR)
-
-PRINTF_DIR = ./ft_printf
-PRINTF_SRCS_DIR = ./srcs
+CFLAGS = -Wall -Wextra -Werror -fPIC
 
 HEADER_DIR = ./includes
-SRCS_DIR =./srcs
+SRCS_DIR = ./srcs
 OBJS_DIR = ./objs
+
+INCLUDES = -I$(HEADER_DIR)
 
 SRCS_FILES = \
 	ft_isalpha.c \
@@ -39,8 +37,6 @@ SRCS_FILES = \
 	ft_substr.c \
 	ft_strjoin.c \
 	ft_strtrim.c \
-	ft_free_strs_until.c \
-	ft_free_strs.c \
 	ft_split.c \
 	ft_itoa.c \
 	ft_strmapi.c \
@@ -58,18 +54,18 @@ SRCS_FILES = \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
+	ft_free_strs.c \
+	ft_free_strs_until.c \
+	ft_strndup.c \
+	ft_strnjoin.c \
 	get_next_line.c \
-	get_next_line_utils.c \
-	ft_printf.c \
-	ft_convert.c \
-	ft_convert_hex.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS) $(PRINTF) -o $(NAME)
+$(NAME): $(OBJS) 
+	ar rcs $(NAME) $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)

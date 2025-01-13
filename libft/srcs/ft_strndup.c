@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_strs.c                                     :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 10:43:19 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/11 08:17:24 by juduchar         ###   ########.fr       */
+/*   Created: 2025/01/11 08:40:53 by juduchar          #+#    #+#             */
+/*   Updated: 2025/01/13 08:39:13 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-// free an array of strings
-void	ft_free_strs(char **strs)
+char	*ft_strndup(const char *src, size_t size)
 {
+	char	*dst;
 	size_t	i;
 
+	dst = (char *) malloc((size + 1) * sizeof(char));
+	if (!dst)
+		return (NULL);
 	i = 0;
-	while (strs[i])
+	while (i < size)
 	{
-		free(strs[i]);
+		dst[i] = src[i];
 		i++;
 	}
-	free(strs);
+	dst[i] = '\0';
+	return (dst);
 }

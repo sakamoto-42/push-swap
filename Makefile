@@ -1,17 +1,24 @@
 NAME = push_swap
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT = libft.a
+FT_PRINTF = libftprintf.a
 
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR)
+
+HEADER_DIR = ./includes
+SRCS_DIR = ./srcs
+OBJS_DIR = ./objs
 
 LIBFT_DIR = ./libft
 LIBFT_HEADER_DIR = $(LIBFT_DIR)/includes
 LIBFT_SRCS_DIR = ./srcs
 
-HEADER_DIR = ./includes
-SRCS_DIR = ./srcs
-OBJS_DIR = ./objs
+FT_PRINTF_DIR = ./ft_printf
+FT_PRINTF_HEADER_DIR = $(FT_PRINTF_DIR)/includes
+FT_PRINTF_SRCS_DIR = ./srcs
+
+INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR) -I$(FT_PRINTF_HEADER_DIR)
+LIBRARIES = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 SRCS_FILES = \
 		check_sorted.c \
@@ -22,7 +29,7 @@ SRCS_FILES = \
 		reverse_rotate.c \
 		rotate.c \
 		set_stack_utils.c \
-		sort_stack_a.c \
+		sort.c \
 		sort_utils.c \
 		stack_init_utils.c \
 		stack_utils.c \
@@ -30,13 +37,16 @@ SRCS_FILES = \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(FT_PRINTF) $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
+$(FT_PRINTF):
+	$(MAKE) -C $(FT_PRINTF_DIR)
+
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME) -lm
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBRARIES) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
@@ -45,10 +55,12 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 clean:
 	rm -f $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(FT_PRINTF_DIR) fclean
 
 re: fclean all
 

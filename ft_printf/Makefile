@@ -1,12 +1,13 @@
 NAME = libftprintf.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(HEADER_DIR)
+CFLAGS = -Wall -Wextra -Werror -fPIC
 
 HEADER_DIR = ./includes
 SRCS_DIR = ./srcs
 OBJS_DIR = ./objs
+
+INCLUDES = -I$(HEADER_DIR)
 
 SRCS_FILES = \
 	ft_printf.c \

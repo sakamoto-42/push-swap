@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/10 10:37:37 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/13 09:15:12 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <stdlib.h>
 # include <limits.h>
-# include <libft.h>
+# include "libft.h"
+# include "ft_printf.h"
 
 typedef struct s_stack
 {
@@ -45,6 +46,7 @@ int			ft_get_stack_size(t_stack *stack);
 t_stack		*ft_find_stack_min(t_stack *stack);
 t_stack		*ft_find_stack_max(t_stack *stack);
 
+
 void		rotate(t_stack **stack);
 int			ra(t_stack **stack_a);
 int			rb(t_stack **stack_b);
@@ -64,14 +66,26 @@ int			sa(t_stack **stack_a);
 int			sb(t_stack **stack_b);
 int			ss(t_stack **stack_a, t_stack **stack_b);
 
-void		ft_sort_stack_a_two(t_stack **stack_a);
-void		ft_sort_stack_a_three(t_stack **stack_a);
-void		ft_sort_stack_a_four(t_stack **stack_a,
+void		ft_sort(t_stack **stack_a,
 				t_stack **stack_b, int size);
-void		ft_sort_stack_a_chunks(t_stack **stack_a, t_stack **stack_b, int size);
+
+void		ft_sort_two(t_stack **stack_a);
+void		ft_sort_three(t_stack **stack_a);
+void		ft_sort_mini(t_stack **stack_a,
+				t_stack **stack_b, int size);
+//void		ft_sort_medium(t_stack **stack_a,
+//				t_stack **stack_b, int size);
+void		ft_sort_big(t_stack **stack_a,
+				t_stack **stack_b, int size);
+
+void		ft_rotate_to_top(t_stack *stack, int *n,
+				int (**move)(t_stack **));
+void		ft_reverse_rotate_to_top(t_stack *stack, int size,
+				int *n, int (**move)(t_stack **));
+
+float		ft_sqrt_float(int nb);
+int			ft_round_up(float value);
 
 void		ft_printf_stacks(t_stack *stack_a, t_stack *stack_b);
-
-float			ft_sqrt_float(int nb);
 
 #endif
