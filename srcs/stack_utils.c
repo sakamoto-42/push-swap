@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 15:24:39 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 21:43:31 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:43:33 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_stack	*ft_find_stack_max(t_stack *stack)
 	stack_max = stack;
 	while (stack->next)
 	{
-		if (stack->next->index < stack_max->index)
+		if (stack->next->index > stack_max->index)
 			stack_max = stack->next;
 		stack = stack->next;
 	}

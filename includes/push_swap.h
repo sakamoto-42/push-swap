@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/13 09:15:12 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/16 09:15:45 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,21 @@ void		ft_sort_two(t_stack **stack_a);
 void		ft_sort_three(t_stack **stack_a);
 void		ft_sort_mini(t_stack **stack_a,
 				t_stack **stack_b, int size);
-//void		ft_sort_medium(t_stack **stack_a,
-//				t_stack **stack_b, int size);
+void		ft_sort_medium(t_stack **stack_a,
+				t_stack **stack_b, int size);
 void		ft_sort_big(t_stack **stack_a,
 				t_stack **stack_b, int size);
 
-void		ft_rotate_to_top(t_stack *stack, int *n,
+void		ft_rotate_stack_a_to_top(t_stack *stack, int *n,
 				int (**move)(t_stack **));
-void		ft_reverse_rotate_to_top(t_stack *stack, int size,
+
+void		ft_reverse_rotate_stack_a_to_top(t_stack *stack, int size,
+				int *n, int (**move)(t_stack **));
+
+void		ft_rotate_stack_b_to_top(t_stack *stack, int *n,
+				int (**move)(t_stack **));
+
+void		ft_reverse_rotate_stack_b_to_top(t_stack *stack, int size,
 				int *n, int (**move)(t_stack **));
 
 float		ft_sqrt_float(int nb);

@@ -22,6 +22,7 @@ LIBRARIES = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 SRCS_FILES = \
 		check_sorted.c \
+		optimize_rotations.c \
 		parse_params_utils.c \
 		parse_params.c \
 		push_swap.c \

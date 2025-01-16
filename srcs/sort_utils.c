@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 09:45:04 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/13 09:17:59 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/16 08:55:59 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "push_swap.h"
 
 float	ft_sqrt_float(int nb)
@@ -38,17 +37,4 @@ int	ft_round_up(float value)
 	if (value > (int)value)
 		return ((int)value + 1);
 	return ((int)value);
-}
-
-void	ft_rotate_to_top(t_stack *stack, int *n, int (**move)(t_stack **))
-{
-	*n = stack->position;
-	*move = ra;
-}
-
-void	ft_reverse_rotate_to_top(t_stack *stack, int size,
-	int *n, int (**move)(t_stack **))
-{
-	*n = size - stack->position;
-	*move = rra;
 }
