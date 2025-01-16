@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/16 15:08:35 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/16 20:05:51 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,44 +76,6 @@ void	ft_sort_mini(t_stack **stack_a, t_stack **stack_b, int size)
 	while (ft_get_stack_size(*stack_b) > 0)
 		pa(stack_a, stack_b);
 }
-/*
-t_stack	*ft_find_stack_between(t_stack *stack, int min, int max)
-{
-	t_stack	*stack_min;
-
-	stack_min = NULL;
-	while (stack->next)
-	{
-		if (stack->next->index >= min && stack->next->index <= max)
-			stack_min = stack->next;
-		stack = stack->next;
-	}
-	return (stack_min);
-}
-*/
-
-/*
-void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int size)
-{
-	float		size_sqrt;
-	float		k;
-	int			n_chunks;
-	int			chunk_size;
-	int			first_chunks;
-	int			remaining_chunks;
-	int			chunk_size_first_chunks;
-
-	k = 2;
-	size = 238;
-	size_sqrt = ft_sqrt_float(size);
-	n_chunks = (int)ft_round_up(size_sqrt * k);
-	chunk_size = size / n_chunks;
-	first_chunks = size % n_chunks;
-	remaining_chunks = n_chunks - first_chunks;
-	chunk_size_first_chunks = chunk_size + 1;
-	//ft_printf("nombre d'elements : %d\nnombre de chunks total : %d\nnombre de premiers chunks : %d\ntaille des premiers chunks : %d\nnombre de chunks restants : %d\ntaille des chunks restants: %d", size, n_chunks, first_chunks,  chunk_size_first_chunks, remaining_chunks, chunk_size);
-}
-*/
 
 int	has_valid_range(t_stack *stack_b, int index)
 {
@@ -170,6 +132,39 @@ t_stack	*find_target(t_stack *stack_a, int target_index)
 	return (NULL);
 }
 
+t_stack	*find_closest_sup(t_stack *stack_a, int index_b)
+{
+	t_stack	*current;
+	t_stack	*closest;
+
+	current = stack_a;
+	closest = NULL;
+	while (current)
+	{
+		if (current->index > index_b)
+		{
+			if (!closest || current->index < closest->index)
+				closest = current;
+		}
+		current = current->next;
+	}
+	return (closest);
+}
+
+int	is_closest_sup(t_stack *stack_a, int index_a, int index_b)
+{
+	t_stack	*current;
+
+	current = stack_a;
+	while (current)
+	{
+		if (current->index > index_b && current->index < index_a)
+			return (0);
+		current = current->next;
+	}
+	return (1);
+}
+
 void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_stack	*max_stack_b;
@@ -215,24 +210,30 @@ void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 		size--;
 	}
 	ft_sort_three(stack_a);
+
+
 	t_stack *max_stack_a;
 	t_stack *min_stack_a;
+	t_stack *target;
 	while (*stack_b)
 	{
 		int index_b = (*stack_b)->index;
-		t_stack	*target = find_target(*stack_a, index_b + 1);
-		if (!target)
+		min_stack_a = ft_find_stack_min(*stack_a);
+		max_stack_a = ft_find_stack_max(*stack_a);
+		if ((*stack_b)->index > max_stack_a->index)
 		{
-			max_stack_a = ft_find_stack_max(*stack_a);
-			min_stack_a = ft_find_stack_min(*stack_a);
-			if (index_b > max_stack_a->index)
-				ft_rotate_to_top(stack_a, max_stack_a, 'a');
-			else
-				ft_rotate_to_top(stack_a, min_stack_a, 'a');
+			ft_rotate_to_top(stack_a, min_stack_a, 'a');
+			pa(stack_a, stack_b);
 		}
+		else if ((*stack_a)->index > index_b && is_closest_sup(*stack_a, (*stack_a)->index, index_b))
+			pa(stack_a, stack_b);
 		else
-			ft_rotate_to_top(stack_a, target, 'a');
-		pa(stack_a, stack_b);
+		{
+			target = find_closest_sup(*stack_a, index_b);
+			while ((*stack_a)->index != target->index)
+				ft_rotate_to_top(stack_a, target, 'a');
+			pa(stack_a, stack_b);
+		}
 	}
 	min_stack_a = ft_find_stack_min(*stack_a);
 	ft_rotate_to_top(stack_a, min_stack_a, 'a');
@@ -246,8 +247,6 @@ void	ft_sort(t_stack **stack_a, t_stack **stack_b, int size)
 		ft_sort_three(stack_a);
 	else if (size >= 4 && size <= 6)
 		ft_sort_mini(stack_a, stack_b, size);
-	else if (size >= 7 && size <= 100)
+	else if (size >= 7)
 		ft_sort_medium(stack_a, stack_b, size);
-	//else
-		//ft_sort_big(&stack_a, &stack_b, size);
 }
