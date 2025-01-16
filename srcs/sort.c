@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/16 09:20:19 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/16 11:49:04 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,90 +115,83 @@ void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int size)
 }
 */
 
+int	has_valid_range(t_stack *stack_b, int index)
+{
+	t_stack	*current;
+
+	current = stack_b;
+	while (current->next)
+	{
+		if (current->index > index && current->next->index < index)
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
+
+void	ft_rotate_to_top(t_stack **stack, t_stack *elem)
+{
+	int		size;
+
+	size = ft_get_stack_size(*stack);
+	if (elem->position <= size / 2)
+	{
+		while (elem->position != 0)
+			rb(stack);
+	}
+	else
+	{
+		while (elem->position != 0)
+			rrb(stack);
+	}
+}
+
 void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_stack	*max_stack_b;
 	t_stack	*min_stack_b;
-	int		count;
-	int		n;
-	int		(*move)(t_stack **);
-	int		i;
+	t_stack	*current;
 
-	count = 0;
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
+	ft_printf("%d", size);
+	while (size - 2 > 3)
+	{
 	min_stack_b = ft_find_stack_min(*stack_b);
 	max_stack_b = ft_find_stack_max(*stack_b);
-
-	// new max
 	if ((*stack_a)->index > max_stack_b->index)
 	{
-		if ((*stack_b)->index != max_stack_b->index)
-		{
-			i = 0;
-			size = ft_get_stack_size(*stack_b);
-			if (max_stack_b->position <= size / 2)
-				ft_rotate_stack_b_to_top(max_stack_b, &n, &move);
-			else
-				ft_reverse_rotate_stack_b_to_top(max_stack_b, size, &n, &move);
-			count += n;
-			while (n--)
-				move(stack_b);
-			i++;
-			size--;
-		}
+		ft_rotate_to_top(stack_b, max_stack_b);
 		pb(stack_a, stack_b);
-		count++;
 	}
-	// new min
-	if ((*stack_a)->index < min_stack_b->index)
+	else if ((*stack_a)->index < min_stack_b->index)
 	{
-		if ((*stack_b)->index != max_stack_b->index)
-		{
-			i = 0;
-			size = ft_get_stack_size(*stack_b);
-			if (max_stack_b->position <= size / 2)
-				ft_rotate_stack_b_to_top(max_stack_b, &n, &move);
-			else
-				ft_reverse_rotate_stack_b_to_top(max_stack_b, size, &n, &move);
-			count += n;
-			while (n--)
-				move(stack_b);
-			i++;
-			size--;
-		}
+		ft_rotate_to_top(stack_b, max_stack_b);
 		pb(stack_a, stack_b);
-		count++;
 	}
-	// si le premier element de a n'est ni le nouveau min ni le nouveau max de b
-	/*
-	if ((*stack_a)->index > min_stack_b->index && (*stack_a)->index < max_stack_b->index)
+	else
 	{
-		// on cherche entre quels nombres il doit etre insere :
-		// si current->index > number et current->next-index < number
-		// on rotate b pour que current->next arrive en haut de b
-		// on push a dans b
-		// si current->index < number && current->next-index > number
-		// on rotate b pour que current->next arrive en haut de b
-		// on push a dans b
-		//ft_printf("%d", (*stack_a)->index);
-		t_stack *current = *stack_b;
-		if ((current->index > (*stack_a)->index) && (current->next->index < (*stack_a)->index))
+		if (has_valid_range(*stack_b, (*stack_a)->index))
 		{
-			//ft_printf("%d %d %d", current->index, (*stack_a)->index, current->next->index);
-			if (current->next)
+			current = *stack_b;
+			while (current->next)
+			{
+				if (current->index > (*stack_a)->index
+					&& current->next->index < (*stack_a)->index)
+				{
+					ft_rotate_to_top(stack_b, current->next);
+					break ;
+				}
 				current = current->next;
-			// on met current->next en haut
-			rb(stack_b);
+			}
 			pb(stack_a, stack_b);
 		}
-			// inutile ?
-			//((current->index < number) && (current->next->index > number)))
-			// on rotate b pour que current->next soit le premier element de b
-			// on push a dans b
-	//}
-	(void)size;*/
+		else
+			pb(stack_a, stack_b);
+	}
+	size--;
+	}
+	ft_sort_three(stack_a);
 }
 
 void	ft_sort(t_stack **stack_a, t_stack **stack_b, int size)
