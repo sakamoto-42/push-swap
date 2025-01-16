@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:17:36 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 15:45:30 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:12:52 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 void	swap(t_stack *stack)
 {
-	int	temp;
+	int	temp_value;
+	int	temp_index;
 
 	if (!stack || !stack->next)
 		return ;
-	temp = stack->next->value;
+	temp_value = stack->next->value;
 	stack->next->value = stack->value;
-	stack->value = temp;
+	stack->value = temp_value;
+	temp_index = stack->next->index;
+	stack->next->index = stack->index;
+	stack->index = temp_index;
 	ft_set_stack_position(stack);
 }
 

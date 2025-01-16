@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/16 11:49:04 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/16 15:08:35 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	has_valid_range(t_stack *stack_b, int index)
 	return (0);
 }
 
-void	ft_rotate_to_top(t_stack **stack, t_stack *elem)
+void	ft_rotate_to_top(t_stack **stack, t_stack *elem, char stack_name)
 {
 	int		size;
 
@@ -137,13 +137,37 @@ void	ft_rotate_to_top(t_stack **stack, t_stack *elem)
 	if (elem->position <= size / 2)
 	{
 		while (elem->position != 0)
-			rb(stack);
+		{
+			if (stack_name == 'a')
+				ra(stack);
+			else if (stack_name == 'b')
+				rb(stack);
+		}
 	}
 	else
 	{
 		while (elem->position != 0)
-			rrb(stack);
+		{
+			if (stack_name == 'a')
+				rra(stack);
+			else if (stack_name == 'b')
+				rrb(stack);
+		}
 	}
+}
+
+t_stack	*find_target(t_stack *stack_a, int target_index)
+{
+	t_stack	*current;
+
+	current = stack_a;
+	while (current)
+	{
+		if (current->index == target_index)
+			return (current);
+		current = current->next;
+	}
+	return (NULL);
 }
 
 void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
@@ -154,44 +178,64 @@ void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
-	ft_printf("%d", size);
 	while (size - 2 > 3)
 	{
-	min_stack_b = ft_find_stack_min(*stack_b);
-	max_stack_b = ft_find_stack_max(*stack_b);
-	if ((*stack_a)->index > max_stack_b->index)
-	{
-		ft_rotate_to_top(stack_b, max_stack_b);
-		pb(stack_a, stack_b);
-	}
-	else if ((*stack_a)->index < min_stack_b->index)
-	{
-		ft_rotate_to_top(stack_b, max_stack_b);
-		pb(stack_a, stack_b);
-	}
-	else
-	{
-		if (has_valid_range(*stack_b, (*stack_a)->index))
+		min_stack_b = ft_find_stack_min(*stack_b);
+		max_stack_b = ft_find_stack_max(*stack_b);
+		if ((*stack_a)->index > max_stack_b->index)
 		{
-			current = *stack_b;
-			while (current->next)
-			{
-				if (current->index > (*stack_a)->index
-					&& current->next->index < (*stack_a)->index)
-				{
-					ft_rotate_to_top(stack_b, current->next);
-					break ;
-				}
-				current = current->next;
-			}
+			ft_rotate_to_top(stack_b, max_stack_b, 'b');
+			pb(stack_a, stack_b);
+		}
+		else if ((*stack_a)->index < min_stack_b->index)
+		{
+			ft_rotate_to_top(stack_b, max_stack_b, 'b');
 			pb(stack_a, stack_b);
 		}
 		else
-			pb(stack_a, stack_b);
-	}
-	size--;
+		{
+			if (has_valid_range(*stack_b, (*stack_a)->index))
+			{
+				current = *stack_b;
+				while (current->next)
+				{
+					if (current->index > (*stack_a)->index
+						&& current->next->index < (*stack_a)->index)
+					{
+						ft_rotate_to_top(stack_b, current->next, 'b');
+						break ;
+					}
+					current = current->next;
+				}
+				pb(stack_a, stack_b);
+			}
+			else
+				pb(stack_a, stack_b);
+		}
+		size--;
 	}
 	ft_sort_three(stack_a);
+	t_stack *max_stack_a;
+	t_stack *min_stack_a;
+	while (*stack_b)
+	{
+		int index_b = (*stack_b)->index;
+		t_stack	*target = find_target(*stack_a, index_b + 1);
+		if (!target)
+		{
+			max_stack_a = ft_find_stack_max(*stack_a);
+			min_stack_a = ft_find_stack_min(*stack_a);
+			if (index_b > max_stack_a->index)
+				ft_rotate_to_top(stack_a, max_stack_a, 'a');
+			else
+				ft_rotate_to_top(stack_a, min_stack_a, 'a');
+		}
+		else
+			ft_rotate_to_top(stack_a, target, 'a');
+		pa(stack_a, stack_b);
+	}
+	min_stack_a = ft_find_stack_min(*stack_a);
+	ft_rotate_to_top(stack_a, min_stack_a, 'a');
 }
 
 void	ft_sort(t_stack **stack_a, t_stack **stack_b, int size)
