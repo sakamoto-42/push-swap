@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/17 12:05:29 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/17 12:49:29 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,96 @@ t_stack	*find_target_in_stack_b(t_stack *stack_b, int index_a)
 	return (NULL);
 }
 
+void	optimize_rotations(t_stack **stack_a, t_stack **stack_b, t_stack *best_a, t_stack *best_target_b)
+{
+	int	rotations_a = 0;
+	int rotations_b = 0;
+	int	min_rotations = 0;
+	int	size_a = ft_get_stack_size(*stack_a);
+	int	size_b = ft_get_stack_size(*stack_b);
+
+	if (!best_a || !best_target_b)
+		return ;
+	rotations_a = ft_count_rotations_to_top(*stack_a, best_a);
+	rotations_b = ft_count_rotations_to_top(*stack_a, best_target_b);
+	if (best_a->position <=  size_a / 2)
+		rotations_a = best_a->position;
+	else
+		rotations_a = size_a - best_a->position;
+	if (best_target_b->position <=  size_b / 2)
+		rotations_b = best_target_b->position;
+	else
+		rotations_b = size_b - best_target_b->position;
+	if (best_a->position <= size_a / 2 && best_target_b->position <= size_b / 2)
+	{
+		if (rotations_a < rotations_b)
+			min_rotations = rotations_a;
+		else
+			min_rotations = rotations_b;
+		while (min_rotations > 0)
+		{
+			rr(stack_a, stack_b);
+			min_rotations--;
+		}
+		rotations_a -= min_rotations;
+		rotations_b -= min_rotations;
+		while (rotations_a > 0)
+		{
+			ra(stack_a);
+			rotations_a--;
+		}
+		while (rotations_b > 0)
+		{
+			rb(stack_b);
+			rotations_b--;
+		}
+	}
+	else if (best_a->position > size_a / 2 && best_target_b->position > size_b / 2)
+	{
+		if (rotations_a < rotations_b)
+			min_rotations = rotations_a;
+		else
+			min_rotations = rotations_b;
+
+		while (min_rotations > 0)
+		{
+			rrr(stack_a, stack_b);
+			min_rotations--;
+		}
+		rotations_a -= min_rotations;
+		rotations_b -= min_rotations;
+		while (rotations_a > 0)
+		{
+			rra(stack_a);
+			rotations_a--;
+		}
+		while (rotations_b > 0)
+		{
+			rrb(stack_b);
+			rotations_b--;
+		}
+	}
+	else
+	{
+		while (rotations_a > 0)
+		{
+			if (best_a->position <= size_a / 2)
+				ra(stack_a);
+			else
+				rra(stack_a);
+			rotations_a--;
+		}
+		while (rotations_b > 0)
+		{
+			if (best_target_b->position <= size_b / 2)
+				rb(stack_b);
+			else
+				rrb(stack_b);
+			rotations_b--;
+		}
+	}
+}
+
 void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_stack	*max_stack_b;
@@ -220,6 +310,7 @@ void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 			}
 			current_a = current_a->next;
 		}
+		//optimize_rotations(stack_a, stack_b, best_a, best_target_b);
 		ft_rotate_to_top(stack_a, best_a, 'a');
 		ft_rotate_to_top(stack_b, best_target_b, 'b');
 		pb(stack_a, stack_b);
