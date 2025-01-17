@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/16 20:05:51 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/17 12:05:29 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,27 @@ void	ft_sort_mini(t_stack **stack_a, t_stack **stack_b, int size)
 		pa(stack_a, stack_b);
 }
 
-int	has_valid_range(t_stack *stack_b, int index)
+int	ft_count_rotations_to_top(t_stack *stack, t_stack *elem)
 {
-	t_stack	*current;
+	int	size;
+	int	position;
 
-	current = stack_b;
-	while (current->next)
-	{
-		if (current->index > index && current->next->index < index)
-			return (1);
-		current = current->next;
-	}
-	return (0);
+	if (!elem)
+		return (0);
+	size = ft_get_stack_size(stack);
+	position = elem->position;
+	if (position <= size / 2)
+		return (position);
+	else
+		return (size - position);
 }
 
 void	ft_rotate_to_top(t_stack **stack, t_stack *elem, char stack_name)
 {
 	int		size;
 
+	if (!elem)
+		return ;
 	size = ft_get_stack_size(*stack);
 	if (elem->position <= size / 2)
 	{
@@ -164,54 +167,65 @@ int	is_closest_sup(t_stack *stack_a, int index_a, int index_b)
 	}
 	return (1);
 }
+t_stack	*find_target_in_stack_b(t_stack *stack_b, int index_a)
+{
+	t_stack	*current;
+
+	current = stack_b;
+	while (current->next)
+	{
+		if (current->index > index_a && current->next->index < index_a)
+			return (current->next);
+		current = current->next;
+	}
+	return (NULL);
+}
 
 void	ft_sort_medium(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_stack	*max_stack_b;
 	t_stack	*min_stack_b;
-	t_stack	*current;
+	t_stack	*target_b;
+	t_stack	*current_a;
+	t_stack	*best_a = NULL;
+	t_stack	*best_target_b = NULL;
+	int		min_cost;
+	int		rotations;
 
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
 	while (size - 2 > 3)
 	{
-		min_stack_b = ft_find_stack_min(*stack_b);
-		max_stack_b = ft_find_stack_max(*stack_b);
-		if ((*stack_a)->index > max_stack_b->index)
+		current_a = *stack_a;
+		min_cost = INT_MAX;
+		best_a = NULL;
+		best_target_b = NULL;
+		while (current_a)
 		{
-			ft_rotate_to_top(stack_b, max_stack_b, 'b');
-			pb(stack_a, stack_b);
-		}
-		else if ((*stack_a)->index < min_stack_b->index)
-		{
-			ft_rotate_to_top(stack_b, max_stack_b, 'b');
-			pb(stack_a, stack_b);
-		}
-		else
-		{
-			if (has_valid_range(*stack_b, (*stack_a)->index))
+			min_stack_b = ft_find_stack_min(*stack_b);
+			max_stack_b = ft_find_stack_max(*stack_b);
+			if ((current_a->index < min_stack_b->index)
+				|| (current_a->index > max_stack_b->index))
 			{
-				current = *stack_b;
-				while (current->next)
-				{
-					if (current->index > (*stack_a)->index
-						&& current->next->index < (*stack_a)->index)
-					{
-						ft_rotate_to_top(stack_b, current->next, 'b');
-						break ;
-					}
-					current = current->next;
-				}
-				pb(stack_a, stack_b);
+				target_b = max_stack_b;
 			}
 			else
-				pb(stack_a, stack_b);
+				target_b = find_target_in_stack_b(*stack_b, current_a->index);
+			rotations = ft_count_rotations_to_top(*stack_a, current_a) + ft_count_rotations_to_top(*stack_b, target_b);
+			if (rotations < min_cost)
+			{
+				min_cost = rotations;
+				best_a = current_a;
+				best_target_b = target_b;
+			}
+			current_a = current_a->next;
 		}
+		ft_rotate_to_top(stack_a, best_a, 'a');
+		ft_rotate_to_top(stack_b, best_target_b, 'b');
+		pb(stack_a, stack_b);
 		size--;
 	}
 	ft_sort_three(stack_a);
-
-
 	t_stack *max_stack_a;
 	t_stack *min_stack_a;
 	t_stack *target;
