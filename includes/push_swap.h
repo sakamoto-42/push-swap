@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/16 09:15:45 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/21 09:44:39 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct s_stack
 	int				position;
 	struct s_stack	*next;
 }	t_stack;
+
+typedef struct	s_rotation
+{
+	int 	count;
+	char	direction;
+}	t_rotation;
 
 char		**ft_parse_params(int ac, char **av);
 
@@ -73,8 +79,7 @@ void		ft_sort_two(t_stack **stack_a);
 void		ft_sort_three(t_stack **stack_a);
 void		ft_sort_mini(t_stack **stack_a,
 				t_stack **stack_b, int size);
-void		ft_sort_medium(t_stack **stack_a,
-				t_stack **stack_b, int size);
+void		ft_sort_medium(t_stack **stack_a, t_stack **stack_b);
 void		ft_sort_big(t_stack **stack_a,
 				t_stack **stack_b, int size);
 

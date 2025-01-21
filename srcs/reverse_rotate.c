@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:17:07 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/09 23:23:13 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/21 09:30:05 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,22 @@ int	rrb(t_stack **stack_b)
 	return (1);
 }
 
+int	rra_silent(t_stack **stack_a)
+{
+	reverse_rotate(stack_a);
+	return (1);
+}
+
+int	rrb_silent(t_stack **stack_b)
+{
+	reverse_rotate(stack_b);
+	return (1);
+}
+
 int	rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rra_silent(stack_a);
+	rrb_silent(stack_b);
 	ft_printf("rrr\n");
 	return (1);
 }
