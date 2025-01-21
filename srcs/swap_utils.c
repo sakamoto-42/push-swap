@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:55:01 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:55:20 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:09:21 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	sb(t_stack **stack_b)
 	ft_printf("sb\n");
 	return (1);
 }
+
 int	sa_silent(t_stack **stack_a)
 {
 	swap(*stack_a);
