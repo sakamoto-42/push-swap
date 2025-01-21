@@ -1,30 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   swap_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 09:11:35 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:53:29 by juduchar         ###   ########.fr       */
+/*   Created: 2025/01/21 13:55:01 by juduchar          #+#    #+#             */
+/*   Updated: 2025/01/21 13:55:20 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_stack **stack)
+int	sa(t_stack **stack_a)
 {
-	t_stack	*first;
-	t_stack	*last;
+	swap(*stack_a);
+	ft_printf("sa\n");
+	return (1);
+}
 
-	if (!stack || !(*stack) || !(*stack)->next)
-		return ;
-	first = *stack;
-	last = *stack;
-	while (last->next)
-		last = last->next;
-	*stack = first->next;
-	last->next = first;
-	first->next = NULL;
-	ft_set_stack_position(*stack);
+int	sb(t_stack **stack_b)
+{
+	swap(*stack_b);
+	ft_printf("sb\n");
+	return (1);
+}
+int	sa_silent(t_stack **stack_a)
+{
+	swap(*stack_a);
+	return (1);
+}
+
+int	sb_silent(t_stack **stack_b)
+{
+	swap(*stack_b);
+	return (1);
+}
+
+int	ss(t_stack **stack_a, t_stack **stack_b)
+{
+	sa_silent(stack_a);
+	sb_silent(stack_b);
+	ft_printf("ss\n");
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:38:33 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/08 17:31:03 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:19:27 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static int	ft_check_params_errors(char **strs_to_check, char **strs_to_free)
 	return (0);
 }
 
-static char	**ft_copy_strs_until(char **dst, char **src,
-	size_t start, size_t len)
+static char	**ft_copy_strs_until(char **dst, char **src, size_t start, size_t len)
 {
 	size_t		i;
 
