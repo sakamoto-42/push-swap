@@ -6,14 +6,13 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:56:40 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/11 08:44:56 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:27:29 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "get_next_line.h"
 
-t_file	*ft_get_or_create_file_struct(int fd, t_file **files)
+static t_file	*ft_get_or_create_file_struct(int fd, t_file **files)
 {
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -29,7 +28,7 @@ t_file	*ft_get_or_create_file_struct(int fd, t_file **files)
 	return (files[fd]);
 }
 
-void	ft_free_file(t_file **file)
+static void	ft_free_file(t_file **file)
 {
 	if (!file || !*file)
 		return ;
@@ -42,7 +41,7 @@ void	ft_free_file(t_file **file)
 	*file = NULL;
 }
 
-char	*ft_extract_line(char **remaining)
+static char	*ft_extract_line(char **remaining)
 {
 	char	*nl_pos;
 	char	*temp;
@@ -67,7 +66,7 @@ char	*ft_extract_line(char **remaining)
 	return (line);
 }
 
-char	*ft_finalize_line(t_file **file_ptr, ssize_t bytes_read)
+static char	*ft_finalize_line(t_file **file_ptr, ssize_t bytes_read)
 {
 	t_file	*file;
 	char	*line;

@@ -69,7 +69,7 @@ CHECKER_OBJS = $(addprefix $(CHECKER_OBJS_DIR)/, $(CHECKER_SRCS_FILES:.c=.o))
 
 all: $(LIBFT) $(FT_PRINTF) $(PUSH_SWAP_NAME)
 
-bonus: $(CHECKER_NAME)
+bonus: $(LIBFT) $(FT_PRINTF) $(CHECKER_NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 17:52:32 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/11 08:43:27 by juduchar         ###   ########.fr       */
+/*   Created: 2025/01/22 11:10:48 by juduchar          #+#    #+#             */
+/*   Updated: 2025/01/22 11:27:57 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #  define OPEN_MAX 256
 # endif
 
+# include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -36,9 +37,6 @@ typedef struct s_file
 	char	buffer[BUFFER_SIZE + 1];
 }				t_file;
 
-t_file	*ft_get_or_create_file_struct(int fd, t_file **files);
-void	ft_free_file(t_file **file);
-char	*ft_finalize_line(t_file **file_ptr, ssize_t bytes_read);
 char	*get_next_line(int fd);
 
 #endif
