@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 08:59:07 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/22 09:42:57 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:57:53 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <limits.h>
 # include "libft.h"
 # include "ft_printf.h"
-
-#endif
 
 typedef struct s_stack
 {
@@ -46,3 +44,5 @@ void				ft_free_stack(t_stack *stack);
 int					sa(t_stack **stack_a);
 int					sb(t_stack **stack_b);
 int					ss(t_stack **stack_a, t_stack **stack_b);
+
+#endif

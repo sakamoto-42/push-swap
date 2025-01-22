@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:35:16 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/22 09:47:25 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:11:26 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	rotate(t_stack **stack)
 	last->next = first;
 	first->next = NULL;
 }
+
 int	ra(t_stack **stack_a)
 {
 	rotate(stack_a);

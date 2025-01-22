@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:34:05 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/22 09:47:20 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:12:03 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	reverse_rotate(t_stack **stack)
 	last->next = *stack;
 	*stack = last;
 }
+
 int	rra(t_stack **stack_a)
 {
 	reverse_rotate(stack_a);
