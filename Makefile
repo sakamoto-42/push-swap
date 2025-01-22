@@ -1,13 +1,20 @@
-NAME = push_swap
+PUSH_SWAP_NAME = push_swap
+CHECKER_NAME = checker
 LIBFT = libft.a
 FT_PRINTF = libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-HEADER_DIR = ./includes
-SRCS_DIR = ./srcs
-OBJS_DIR = ./objs
+PUSH_SWAP_DIR = ./push_swap
+PUSH_SWAP_HEADER_DIR = $(PUSH_SWAP_DIR)/includes
+PUSH_SWAP_SRCS_DIR = $(PUSH_SWAP_DIR)/srcs
+PUSH_SWAP_OBJS_DIR = $(PUSH_SWAP_DIR)/objs
+
+CHECKER_DIR = ./checker
+CHECKER_HEADER_DIR = $(CHECKER_DIR)/includes
+CHECKER_SRCS_DIR = $(CHECKER_DIR)/srcs
+CHECKER_OBJS_DIR = $(CHECKER_DIR)/objs
 
 LIBFT_DIR = ./libft
 LIBFT_HEADER_DIR = $(LIBFT_DIR)/includes
@@ -17,10 +24,13 @@ FT_PRINTF_DIR = ./ft_printf
 FT_PRINTF_HEADER_DIR = $(FT_PRINTF_DIR)/includes
 FT_PRINTF_SRCS_DIR = ./srcs
 
-INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADER_DIR) -I$(FT_PRINTF_HEADER_DIR)
-LIBRARIES = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
+PUSH_SWAP_INCLUDES = -I$(PUSH_SWAP_HEADER_DIR) -I$(LIBFT_HEADER_DIR) -I$(FT_PRINTF_HEADER_DIR)
+PUSH_SWAP_LIBRARIES = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
-SRCS_FILES = \
+CHECKER_INCLUDES = -I$(CHECKER_HEADER_DIR) -I$(LIBFT_HEADER_DIR) -I$(FT_PRINTF_HEADER_DIR)
+CHECKER_LIBRARIES = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
+
+PUSH_SWAP_SRCS_FILES = \
 		check_sorted.c \
 		count_rotations.c \
 		optimize_rotations.c \
@@ -41,9 +51,25 @@ SRCS_FILES = \
 		swap_utils.c \
 		swap.c
 
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
+CHECKER_SRCS_FILES = \
+		check_sorted.c \
+		checker.c \
+		parse_params_utils.c \
+		parse_params.c \
+		push.c \
+		reverse_rotate.c \
+		rotate.c \
+		set_stack_a.c \
+		stack_init_utils.c \
+		swap.c \
 
-all: $(LIBFT) $(FT_PRINTF) $(NAME)
+PUSH_SWAP_OBJS = $(addprefix $(PUSH_SWAP_OBJS_DIR)/, $(PUSH_SWAP_SRCS_FILES:.c=.o))
+
+CHECKER_OBJS = $(addprefix $(CHECKER_OBJS_DIR)/, $(CHECKER_SRCS_FILES:.c=.o))
+
+all: $(LIBFT) $(FT_PRINTF) $(PUSH_SWAP_NAME)
+
+bonus: $(CHECKER_NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -51,23 +77,32 @@ $(LIBFT):
 $(FT_PRINTF):
 	$(MAKE) -C $(FT_PRINTF_DIR)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBRARIES) -o $(NAME)
+$(CHECKER_NAME): $(CHECKER_OBJS)
+	$(CC) $(CFLAGS) $(CHECKER_INCLUDES) $(CHECKER_OBJS) $(CHECKER_LIBRARIES) -o $(CHECKER_DIR)/$(CHECKER_NAME)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(CHECKER_OBJS_DIR)/%.o: $(CHECKER_SRCS_DIR)/%.c
+	@mkdir -p $(CHECKER_OBJS_DIR)
+	$(CC) $(CFLAGS) $(CHECKER_INCLUDES) -c $< -o $@
+
+$(PUSH_SWAP_NAME): $(PUSH_SWAP_OBJS)
+	$(CC) $(CFLAGS) $(PUSH_SWAP_INCLUDES) $(PUSH_SWAP_OBJS) $(PUSH_SWAP_LIBRARIES) -o $(PUSH_SWAP_DIR)/$(PUSH_SWAP_NAME)
+
+$(PUSH_SWAP_OBJS_DIR)/%.o: $(PUSH_SWAP_SRCS_DIR)/%.c
+	@mkdir -p $(PUSH_SWAP_OBJS_DIR)
+	$(CC) $(CFLAGS) $(PUSH_SWAP_INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(PUSH_SWAP_OBJS)
+	rm -f $(CHECKER_OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(PUSH_SWAP_DIR)/$(PUSH_SWAP_NAME)
+	rm -f $(CHECKER_DIR)/$(CHECKER_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(FT_PRINTF_DIR) fclean
 
 re: fclean all
 
-.PHONY: allclean fclean re
+.PHONY: all clean fclean re bonus
