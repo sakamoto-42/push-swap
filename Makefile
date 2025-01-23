@@ -4,7 +4,7 @@ LIBFT = libft.a
 FT_PRINTF = libftprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 PUSH_SWAP_DIR = ./push_swap
 PUSH_SWAP_HEADER_DIR = $(PUSH_SWAP_DIR)/includes

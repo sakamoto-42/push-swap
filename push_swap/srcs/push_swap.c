@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:50:13 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:16:26 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int	main(int argc, char **argv)
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
 	if (ft_check_stack_a_sorted(stack_a))
+	{
+		ft_free_stack(stack_a);
 		return (0);
+	}
 	size = ft_get_stack_size(stack_a);
 	ft_sort(&stack_a, &stack_b, size);
+	ft_free_stack(stack_a);
 	return (0);
 }

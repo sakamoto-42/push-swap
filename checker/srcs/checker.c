@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:00:23 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/22 19:55:48 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/23 12:44:49 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,25 @@ int	main(int argc, char **argv)
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
 	if (ft_check_stack_a_sorted(stack_a))
+	{
+		ft_free_stack(stack_a);
 		return (0);
+	}
 	if (!ft_process_instructions(&stack_a, &stack_b))
 	{
 		ft_putstr_fd("Error\n", 2);
+		ft_free_stack(stack_a);
 		return (1);
 	}
 	if (ft_check_stack_a_sorted(stack_a))
+	{
 		ft_printf("OK\n");
+		ft_free_stack(stack_a);
+	}
 	else
+	{
 		ft_printf("KO\n");
+		ft_free_stack(stack_a);
+	}
 	return (0);
 }

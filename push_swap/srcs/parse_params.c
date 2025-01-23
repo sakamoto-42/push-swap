@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:38:33 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 16:08:53 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:26:09 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static char	**ft_concat_and_free_strs(char **strs, char **current_strs)
 
 	temp_strs = strs;
 	strs = concat_strs(strs, current_strs);
+	if (!strs)
+		return (NULL);
 	ft_free_strs(temp_strs);
 	ft_free_strs(current_strs);
 	return (strs);
