@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_b_to_stack_a.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:24:19 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 17:02:45 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:20:31 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_stack	*ft_get_target_a(t_stack *current_b, t_stack *stack_a)
 	max_stack_a = ft_find_stack_max(stack_a);
 	if ((current_b->index < min_stack_a->index)
 		|| (current_b->index > max_stack_a->index))
-		return (ft_find_stack_min(stack_a));
+		return (min_stack_a);
 	else
 		return (find_target_in_stack_a(stack_a, current_b->index));
 }
