@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/26 10:28:40 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 15:42:31 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_stack_b_to_a
 	int			total_rotations;
 }	t_stack_b_to_a;
 
-int					ft_check_stack_a_sorted(t_stack *stack);
+int					ft_check_sorted(t_stack *stack_a, t_stack *stack_b);
 t_rotation			ft_count_rotations_to_top(t_stack *stack, t_stack *elem);
 int					ft_count_total_rotations(t_rotation	rotations_a,
 						t_rotation rotations_b);

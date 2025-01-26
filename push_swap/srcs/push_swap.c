@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/23 12:16:26 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:20:28 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ int	main(int argc, char **argv)
 	if (argc - 1 == 0)
 		return (1);
 	strs = ft_parse_params(argc, argv);
-	if (!strs)
+	if (!strs || !*strs)
+	{
+		if (!*strs)
+			free(strs);
+		ft_putstr_fd("Error\n", 2);
 		return (1);
+	}
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
-	if (ft_check_stack_a_sorted(stack_a))
-	{
-		ft_free_stack(stack_a);
-		return (0);
-	}
+	if (ft_check_sorted(stack_a, stack_b))
+		return (ft_free_stack(stack_a), 0);
 	size = ft_get_stack_size(stack_a);
 	ft_sort(&stack_a, &stack_b, size);
-	ft_free_stack(stack_a);
-	return (0);
+	return (ft_free_stack(stack_a), ft_free_stack(stack_b), 0);
 }

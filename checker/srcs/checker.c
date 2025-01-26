@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:00:23 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/23 12:44:49 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:24:38 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,22 @@ static int	ft_process_instructions(t_stack	**stack_a, t_stack **stack_b)
 	return (1);
 }
 
+static void	ft_check_sorted_and_free_stack(t_stack **stack_a, t_stack **stack_b)
+{
+	if (ft_check_sorted(*stack_a, *stack_b))
+	{
+		ft_printf("OK\n");
+		ft_free_stack(*stack_a);
+		ft_free_stack(*stack_b);
+	}
+	else
+	{
+		ft_printf("KO\n");
+		ft_free_stack(*stack_a);
+		ft_free_stack(*stack_b);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	char	**strs;
@@ -72,30 +88,20 @@ int	main(int argc, char **argv)
 	if (argc - 1 == 0)
 		return (1);
 	strs = ft_parse_params(argc, argv);
-	if (!strs)
+	if (!strs || !*strs)
+	{
+		if (!*strs)
+			free(strs);
+		ft_putstr_fd("Error\n", 2);
 		return (1);
+	}
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
-	if (ft_check_stack_a_sorted(stack_a))
-	{
-		ft_free_stack(stack_a);
-		return (0);
-	}
 	if (!ft_process_instructions(&stack_a, &stack_b))
 	{
 		ft_putstr_fd("Error\n", 2);
-		ft_free_stack(stack_a);
-		return (1);
+		return (ft_free_stack(stack_a), ft_free_stack(stack_b), 1);
 	}
-	if (ft_check_stack_a_sorted(stack_a))
-	{
-		ft_printf("OK\n");
-		ft_free_stack(stack_a);
-	}
-	else
-	{
-		ft_printf("KO\n");
-		ft_free_stack(stack_a);
-	}
+	ft_check_sorted_and_free_stack(&stack_a, &stack_b);
 	return (0);
 }

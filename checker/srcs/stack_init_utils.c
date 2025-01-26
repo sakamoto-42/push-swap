@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_init_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:22:40 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/22 09:22:51 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:02:43 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_free_stack(t_stack *stack)
 	t_stack	*current;
 	t_stack	*temp;
 
+	if (!stack)
+		return ;
 	current = stack;
 	while (current)
 	{

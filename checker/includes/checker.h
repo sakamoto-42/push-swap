@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 08:59:07 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/22 19:57:53 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/26 15:54:33 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
-int					ft_check_stack_a_sorted(t_stack *stack);
+int					ft_check_sorted(t_stack *stack_a, t_stack *stack_b);
 int					ft_is_nbr(const char *str);
 int					ft_is_int(const char *str);
 int					ft_is_unique(t_stack *stack_a, int value);
