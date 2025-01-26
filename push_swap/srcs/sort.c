@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:31:56 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 14:24:44 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 10:31:06 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,20 @@ void	ft_sort_three(t_stack **stack_a)
 		rra(stack_a);
 }
 
+void	ft_sort_four(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack	*min_stack_a;
+
+	min_stack_a = ft_find_stack_min(*stack_a);
+	ft_rotate_to_top_simple(stack_a, min_stack_a, 'a');
+	if (!ft_check_stack_a_sorted(*stack_a))
+	{
+		pb(stack_a, stack_b);
+		ft_sort_three(stack_a);
+		pa(stack_a, stack_b);
+	}
+}
+
 void	ft_sort_big(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*min_stack_a;
@@ -66,6 +80,8 @@ void	ft_sort(t_stack **stack_a, t_stack **stack_b, int size)
 		ft_sort_two(stack_a);
 	else if (size == 3)
 		ft_sort_three(stack_a);
+	else if (size == 4)
+		ft_sort_four(stack_a, stack_b);
 	else
 		ft_sort_big(stack_a, stack_b);
 }

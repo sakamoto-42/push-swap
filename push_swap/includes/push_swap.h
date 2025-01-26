@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:43 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/21 16:58:20 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 10:28:40 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void				ft_set_stack_index(t_stack *stack_a);
 void				ft_set_stack_position(t_stack *stack);
 void				ft_sort_two(t_stack **stack_a);
 void				ft_sort_three(t_stack **stack_a);
+void				ft_sort_four(t_stack **stack_a, t_stack **stack_b);
 void				ft_sort_big(t_stack **stack_a, t_stack **stack_b);
 void				ft_sort(t_stack **stack_a, t_stack **stack_b, int size);
 t_stack				*find_target_in_stack_b(t_stack *stack_b, int index_a);
