@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:00:23 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/26 16:24:38 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/27 09:39:29 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,23 @@ static void	ft_check_sorted_and_free_stack(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
+static int	ft_check_strs_errors(char **strs)
+{
+	if (!strs)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	if (!*strs)
+	{
+		if (!*strs)
+			free(strs);
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**strs;
@@ -88,13 +105,8 @@ int	main(int argc, char **argv)
 	if (argc - 1 == 0)
 		return (1);
 	strs = ft_parse_params(argc, argv);
-	if (!strs || !*strs)
-	{
-		if (!*strs)
-			free(strs);
-		ft_putstr_fd("Error\n", 2);
+	if (!ft_check_strs_errors(strs))
 		return (1);
-	}
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
 	if (!ft_process_instructions(&stack_a, &stack_b))
