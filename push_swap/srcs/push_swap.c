@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/29 09:56:40 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:58:27 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		return (1);
 	strs = ft_parse_params(argc, argv);
 	if (!strs)
-		return(ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd("Error\n", 2), 1);
 	if (!*strs)
 		return (free(strs), ft_putstr_fd("Error\n", 2), 1);
 	if (!ft_set_stack_a(&stack_a, strs))
