@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:12:35 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/27 09:42:56 by juduchar         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:21:06 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ char	**ft_parse_params(int ac, char **av)
 	{
 		current_strs = ft_split(av[i], ' ');
 		if (ft_check_params_errors(current_strs, strs))
+		{
+			ft_putstr_fd("Error\n", 2);
 			return (NULL);
+		}
 		if (!strs)
 			strs = current_strs;
 		else
