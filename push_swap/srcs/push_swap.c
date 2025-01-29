@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:32:52 by juduchar          #+#    #+#             */
-/*   Updated: 2025/01/26 16:20:28 by julien           ###   ########.fr       */
+/*   Updated: 2025/01/29 09:56:40 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@ int	main(int argc, char **argv)
 	if (argc - 1 == 0)
 		return (1);
 	strs = ft_parse_params(argc, argv);
-	if (!strs || !*strs)
-	{
-		if (!*strs)
-			free(strs);
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
+	if (!strs)
+		return(ft_putstr_fd("Error\n", 2), 1);
+	if (!*strs)
+		return (free(strs), ft_putstr_fd("Error\n", 2), 1);
 	if (!ft_set_stack_a(&stack_a, strs))
 		return (1);
 	if (ft_check_sorted(stack_a, stack_b))
